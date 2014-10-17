@@ -1,9 +1,14 @@
+highlighter: pygments
 markdown: rdiscount
 redcarpet:
-    extensions: ["fenced_code_blocks", "autolink", "tables", "strikethrough"]
+  extensions:
+    - hard_wrap
+    - no_intra_emphasis
+    - autolink
+    - strikethrough
+    - fenced_code_blocks
 permalink: /:year/:month/:title/
 #url: http://blog.sevenche.com
 author: zhengkang
 #pygments: true
-highlighter: pygments
 paginate: 24
