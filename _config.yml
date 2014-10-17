@@ -5,6 +5,8 @@ redcarpet:
     - hard_wrap
     - no_intra_emphasis
     - autolink
+    - highlight
+    - tables
     - strikethrough
     - fenced_code_blocks
 permalink: /:year/:month/:title/
