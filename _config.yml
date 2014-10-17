@@ -1,4 +1,6 @@
 markdown: rdiscount
+redcarpet:
+    extensions: ["fenced_code_blocks", "autolink", "tables", "strikethrough"]
 permalink: /:year/:month/:title/
 #url: http://blog.sevenche.com
 author: zhengkang
