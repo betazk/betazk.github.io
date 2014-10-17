@@ -4,5 +4,6 @@ redcarpet:
 permalink: /:year/:month/:title/
 #url: http://blog.sevenche.com
 author: zhengkang
-pygments: true
+#pygments: true
+highlighter: pygments
 paginate: 24
