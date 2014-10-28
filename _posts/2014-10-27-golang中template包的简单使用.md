@@ -1,4 +1,4 @@
----
+﻿---
 layout: post
 title: golang中html/template包的简单实用
 categories:
@@ -19,7 +19,7 @@ tags:
 ##使用方式
 通过一个小代码来解释一下吧：
 
-{{% highlight golang %}}
+{{% highlight go %}}
 	
 	var (
 		httpTemplate = `
@@ -56,7 +56,7 @@ tags:
 ##模板语法
 现在看看模板语句，也就是`httpTemplate`这个字符串，双大括号是区分模板代码(里面的变量由Execute执行时传入的)和HTML或者正常文本的分隔符(可通过template包提供的Delims方法修改)，括号里面可以显示输出的数据，或者是控制语句，比如if判断或者range循环等。跟在range后面的必须是一个array，slice或者map类型变量，这点跟golang的循环中range后面的类型一样，但是在语句中只是一个点“`.`”并看不出来是什么类型，那这个点代表了什么？这里就要和上面的程序代码结合起来了，我们在Execute的时候传进去第二个参数datas，很明显datas这个变量是个slice类型的，忽略“`| trim`”，我们可以把这个语句翻译成
 
-{{% highlight golang %}}
+{{% highlight go %}}
 
 	for _,v:=range datas{
 		fmt.Println(v.AppName+"will come")	
@@ -75,7 +75,7 @@ tags:
 
 `t.Funcs`方法有个FuncMap类型的参数，这个具体可以查看[文档](http://golang.org/pkg/text/template/#Template.Funcs),FuncMap是个map类型`type FuncMap map[string]interface{}`,顾名思义，这个方法的功能就是用来函数映射的，将一个字符串映射到一个函数中去，函数的输入参数就是管道左边的数据流变量值，函数的输出参数就是对数据流处理过后的结果。那么`{{.AppName | trim }}`我们可以把它看作是:
 
-{{% highlight golang %}}
+{{% highlight go %}}
 
 	func trim(s template.HTML) template.HTML{
 		return template.HTML(strings.Repeat(string(s),4))
