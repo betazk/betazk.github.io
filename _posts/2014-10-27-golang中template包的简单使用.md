@@ -1,6 +1,6 @@
 ---
 layout: post
-title: golang中html/template包的简单实用
+title: golang中template包的简单实用
 categories:
 - 技术
 tags:
