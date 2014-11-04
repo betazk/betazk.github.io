@@ -62,6 +62,7 @@ martini的整个框架的后台动力都是来自inject这个包，它其实是�
 		values map[reflect.Type]reflect.Value
 		parent Injector
 	}
+
 {% endhighlight %}
 
 `values`是用来存储每一个`<type-value>`键值对的，每一个类型只对应于一个值，因为要是有两个值的类型相同的话，那么后面一个值将会把前面的一个值覆盖掉。`parent`这个字段存储了此节点的父节点。
@@ -76,7 +77,9 @@ martini的整个框架的后台动力都是来自inject这个包，它其实是�
 			values: make(map[reflect.Type]reflect.Value),
 		}
 	}
+
 {% endhighlight %}
+
 下面是`in.Map(12)`这条语句，顾名思义就是将`12`这个数值进行映射，在inject中唯一可以存储映射的就只有`values`了，那么它当然就应该存储到values里面。代码如下：
 
 {% highlight go %}
@@ -87,6 +90,7 @@ martini的整个框架的后台动力都是来自inject这个包，它其实是�
 		i.values[reflect.TypeOf(val)] = reflect.ValueOf(val)
 		return i
 	}
+
 {% endhighlight %}
 
 返回的这个`TypeMapper`是一个接口
@@ -109,6 +113,7 @@ martini的整个框架的后台动力都是来自inject这个包，它其实是�
 		// the Type has not been mapped.
 		Get(reflect.Type) reflect.Value
 	}
+
 {% endhighlight %}
 
 下面我们会看到其实`inject`这个结构实现了`TypeMapper`这个接口。所以返回值我们也可以理解为inject这个结构本身。是否需要这个返回值根据情况而定，大多数时候都不需要(但是不管你要不要，它都给你返回了^_^)。
@@ -150,7 +155,7 @@ martini的整个框架的后台动力都是来自inject这个包，它其实是�
 
 既然是调用，那么肯定是需要参数的，而参数之前又已经存储到了values中，所以现在只需要到values中把参数取出来就OK了。由于values是一个`<type-value>`键值对，所以想要获取值首先得知道这个值的类型，`t.In(i)`就是获取参数的类型，i是一个索引，表示第几个参数(从0开始)，在获取类型之后，就可以到values中取值了，代码中取值使用了Get这个方法，下面是Get方法的代码，也很简单
 
-{ % highlight go % }
+{% highlight go %}
 
 	func (i *injector) Get(t reflect.Type) reflect.Value {
 		val := i.values[t]
@@ -242,6 +247,7 @@ martini的整个框架的后台动力都是来自inject这个包，它其实是�
 		inChild.SetParent(inP)
 		inChild.Invoke(do)
 	}
+
 {% endhighlight %}
 
 运行结果为:`25 12 zhengk`
